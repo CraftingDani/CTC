@@ -1,0 +1,16 @@
+{
+    "name": "Catch The Cookies",
+    "short_name": "CTC",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#123",
+    "description": "Catch The Cookies! Game by CraftingDani",
+    "theme_color": "#321",
+    "lang": "en",
+    "icons":
+    [{
+        "src": "./assets/cookie.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }]
+}
