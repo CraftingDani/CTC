@@ -143,6 +143,8 @@ class Cookie
         this.element.style.left = randInt(0, width - cookieWidth) + "px"
         this.element.style.width = cookieWidth + "px"
         this.top = 0
+        this.special = randInt(0, 10) == 10 //1:9 chance
+        if(this.special) this.element.classList.add("specialCookie")
 
         //this.updatePosition()
         //this.element.addEventListener("click", this.click)
