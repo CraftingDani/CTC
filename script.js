@@ -6,6 +6,7 @@ let running = false
 let cookieTime = 1500
 let cookieSpeed = 2
 let width = 0
+let highScore = localStorage.getItem("ctc.highScore")
 const cookies = []
 
 
@@ -15,6 +16,7 @@ const cookies = []
 registerSW()
 updateBodySize()
 $(".play").addEventListener("click", startGame)
+$("#highScore").innerText = highScore
 
 
 
@@ -38,13 +40,13 @@ async function registerSW()
 
 function startGame()
 {
-    $(".title").classList.add("hide")
-    $(".game").classList.remove("hide")
-    
     cookies.forEach(function(i)
     {
         i.delete()
     })
+
+    $(".title").classList.add("hide")
+    $(".game").classList.remove("hide")
 
     running = true
     spawnCookies()
@@ -62,8 +64,10 @@ function gameOver()
     $(".title").classList.remove("hide")
     $(".game").classList.add("hide")
 
-    cookieTime = 1500
+    $("p.score").innerText = 0
     cookieSpeed = 2
+    
+    $("#highScore").innerText = highScore
 }
 
 
@@ -83,8 +87,10 @@ function spawnCookies()
             }, 200)
         })
 
-        cookieTime -= 2
-        cookieSpeed += 0.2
+        cookieSpeed += 0.1
+
+        print(cookieTime)
+        print(cookieSpeed)
 
     }, cookieTime)
 }
@@ -143,11 +149,8 @@ class Cookie
         this.element.style.left = randInt(0, width - cookieWidth) + "px"
         this.element.style.width = cookieWidth + "px"
         this.top = 0
-        this.special = randInt(0, 10) == 10 //1:9 chance
+        this.special = randInt(0, 15) == 10
         if(this.special) this.element.classList.add("specialCookie")
-
-        //this.updatePosition()
-        //this.element.addEventListener("click", this.click)
 
         cookies.push(this)
     }
@@ -162,6 +165,19 @@ class Cookie
     click()
     {
         this.element.style.scale = "0%"
+        if(this.special) return this.incrementScore(2)
+        this.incrementScore(1)
+    }
+
+    incrementScore(amount)
+    {
+        $("p.score").innerText = parseInt($("p.score").innerText) + amount
+
+        if(parseInt($("p.score").innerText) >  highScore)  // highscore
+        {
+            highScore = parseInt($("p.score").innerText)
+            localStorage.setItem("ctc.highScore", highScore)
+        }
     }
 
     fail()
@@ -170,6 +186,7 @@ class Cookie
         setTimeout(function()
         {
             gameOver()
+
         }, 200)
     }
 

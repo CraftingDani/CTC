@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#151515">
-    <title>Catch The Cookies</title>
+    <title>Catch The Cookies!</title>
     <script defer src="script.js"></script>
     <link rel="shortcut icon" href="assets/cookie.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/cookie.png">
@@ -22,13 +22,17 @@
     <main>
         <div class="title">
             <h1>Catch The Cookies!</h1>
+            <div class="highScore">
+                <label for="highScore">High Score:</label>
+                <p id="highScore">0</p>
+            </div>
             <button class="play">PLAY</button>
         </div>
 
         <div class="game hide">
             <div class="hud">
-                <p>score: 0</p>
-                <p>highScore: 0</p>
+                <label for="score">Score:</label>
+                <p id="score" class="score">0</p>
             </div>
         </div>
     </main>
